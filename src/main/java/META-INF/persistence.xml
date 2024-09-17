@@ -4,6 +4,7 @@
 	<persistence-unit name="java_maven_hibernate">
 	
 	<class>model.UsuarioPessoa</class>
+	<class>model.TelefoneUser</class>
 	
 	<properties>
 	<!-- Dados do banco de dados -->
