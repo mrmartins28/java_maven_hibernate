@@ -9,18 +9,23 @@ import model.UsuarioPessoa;
 public class TesteHibernateUtil {
 	
 	@Test
+	public void teste() {
+		HibernateUtil.getEntityManager();
+	}
+	
+	@Test
 	public void testeHibernateUtil() {
 		
 		DaoGeneric<UsuarioPessoa> daoGeneric = new DaoGeneric<UsuarioPessoa>();
 		
 		UsuarioPessoa pessoa = new UsuarioPessoa();
 		
-		pessoa.setNome("gyhbvcvb");
-		pessoa.setIdade(55);
+		pessoa.setNome("jose");
+		pessoa.setIdade(35);
 		pessoa.setLogin("zxzgxcvmvzv");
 		pessoa.setSenha("34354");
-		pessoa.setEmail("leo@gmail.com");
-		pessoa.setSobrenome("xcbnhb 2");
+		pessoa.setEmail("jose@gmail.com");
+		pessoa.setSobrenome("xcbndbgdshb 2");
 		
 		daoGeneric.salvar(pessoa);
 	}
@@ -59,7 +64,7 @@ public class TesteHibernateUtil {
 		
 		DaoGeneric<UsuarioPessoa> daoGeneric = new DaoGeneric<UsuarioPessoa>();
 		
-		UsuarioPessoa pessoa = daoGeneric.pesquisar(1L, UsuarioPessoa.class);
+		UsuarioPessoa pessoa = daoGeneric.pesquisar(3L, UsuarioPessoa.class);
 		
 		daoGeneric.deletarPorId(pessoa);
 		
@@ -116,6 +121,28 @@ public class TesteHibernateUtil {
 		for (UsuarioPessoa usuarioPessoa : list) {
 			System.out.println(usuarioPessoa);
 		}
+	}
+	
+	@Test
+	public void testeNamedQuery() {
+		DaoGeneric<UsuarioPessoa> daoGeneric = new DaoGeneric<UsuarioPessoa>();
+		List<UsuarioPessoa> list = daoGeneric.getEntityManager().createNamedQuery("UsuarioPessoa.todos").getResultList();
+		
+		for (UsuarioPessoa usuarioPessoa : list) {
+			System.out.println(usuarioPessoa);
+		}
+		
+	}
+	@Test
+	public void testeNamedQuery2() {
+		DaoGeneric<UsuarioPessoa> daoGeneric = new DaoGeneric<UsuarioPessoa>();
+		List<UsuarioPessoa> list = daoGeneric.getEntityManager().createNamedQuery("UsuarioPessoa.buscaPorNome")
+				.setParameter("nome", "jose").getResultList();
+		
+		for (UsuarioPessoa usuarioPessoa : list) {
+			System.out.println(usuarioPessoa);
+		}
+		
 	}
 
 }
